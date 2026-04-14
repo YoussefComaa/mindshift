@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindShift — Learn Better, Faster.</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --teal: #00c9a7;
+  --teal-dim: #00a98a;
+  --teal-glow: rgba(0,201,167,0.18);
+  --red: #ff4d4d;
+  --red-glow: rgba(255,77,77,0.15);
+  --bg: #030d12;
+  --bg2: #061520;
+  --bg3: #0a1e2a;
+  --text: #e8f4f1;
+  --text-muted: #7a9fa8;
+  --border: rgba(0,201,167,0.15);
+  --border-bright: rgba(0,201,167,0.4);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* GRID BACKGROUND */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,201,167,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,201,167,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%;
+  height: 68px;
+  background: rgba(3,13,18,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  color: var(--teal);
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(0,201,167,0.5);
+}
+
+.nav-logo span { color: var(--text); }
+
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--teal); }
+
+.nav-cta {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--bg);
+  background: var(--teal);
+  padding: 8px 22px;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.nav-cta:hover {
+  background: #00e6be;
+  box-shadow: 0 0 20px rgba(0,201,167,0.5);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 100px 6% 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glowing orbs */
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,201,167,0.08) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -55%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,77,77,0.06) 0%, transparent 70%);
+  bottom: 10%; right: 10%;
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--teal);
+  opacity: 0.5;
+}
+
+.hero h1 {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.hero h1 .line1 { color: var(--text); display: block; }
+.hero h1 .line2 {
+  color: var(--teal);
+  display: block;
+  text-shadow: 0 0 40px rgba(0,201,167,0.4);
+}
+.hero h1 .line3 { color: var(--text); display: block; }
+
+.hero-sub {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+  margin-bottom: 3rem;
+}
+
+.hero-btns { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 4rem; }
+
+.btn-teal {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--bg);
+  background: var(--teal);
+  padding: 14px 36px;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  transition: all 0.2s;
+  box-shadow: 0 0 0 rgba(0,201,167,0);
+}
+.btn-teal:hover {
+  background: #00e6be;
+  box-shadow: 0 0 30px rgba(0,201,167,0.4);
+}
+
+.btn-ghost {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--teal);
+  padding: 13px 36px;
+  border: 1px solid var(--border-bright);
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  transition: all 0.2s;
+}
+.btn-ghost:hover {
+  background: var(--teal-glow);
+  border-color: var(--teal);
+}
+
+/* STATS ROW */
+.stats-row {
+  display: flex; gap: 0;
+  border: 1px solid var(--border);
+  background: rgba(6,21,32,0.8);
+  position: relative;
+}
+
+.stat-item {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.stat-item:last-child { border-right: none; }
+
+.stat-n {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--teal);
+  text-shadow: 0 0 20px rgba(0,201,167,0.4);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.stat-l {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* SECTION SHARED */
+section { padding: 6rem 6%; position: relative; }
+
+.sec-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 12px;
+}
+.sec-label::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--teal);
+  opacity: 0.4;
+}
+
+.sec-title {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+}
+
+.sec-sub {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 500px;
+  font-weight: 400;
+}
+
+/* PROBLEM */
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.problem-list { display: flex; flex-direction: column; gap: 1px; margin-top: 2.5rem; }
+
+.prob-item {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  border: 1px solid var(--border);
+  background: rgba(6,21,32,0.5);
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+.prob-item:hover {
+  border-color: rgba(255,77,77,0.4);
+  background: rgba(255,77,77,0.04);
+}
+
+.prob-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--red);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.prob-item:hover::before { opacity: 1; }
+
+.prob-icon {
+  font-size: 1.2rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.prob-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.prob-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* COMPETITION MAP */
+.comp-map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  max-width: 420px;
+  border: 1px solid var(--border);
+  background: rgba(6,21,32,0.8);
+}
+
+.axis-h, .axis-v {
+  position: absolute;
+  background: rgba(0,201,167,0.2);
+}
+.axis-h { height: 1px; width: 100%; top: 50%; left: 0; }
+.axis-v { width: 1px; height: 100%; left: 50%; top: 0; }
+
+.axis-label {
+  position: absolute;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.map-dot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+
+.dot-circle {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  opacity: 0.5;
+}
+.dot-circle.active {
+  background: var(--teal);
+  opacity: 1;
+  box-shadow: 0 0 12px rgba(0,201,167,0.6);
+  width: 14px; height: 14px;
+}
+
+.dot-name {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.dot-name.active { color: var(--teal); }
+
+/* HOW IT WORKS */
+.how-section { background: var(--bg2); }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  border: 1px solid var(--border);
+  margin-top: 3rem;
+  background: var(--border);
+}
+
+.step {
+  background: var(--bg2);
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+.step:hover { background: rgba(0,201,167,0.04); }
+
+.step::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--teal);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+  transform-origin: left;
+}
+.step:hover::before { transform: scaleX(1); }
+
+.step-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: rgba(0,201,167,0.12);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.step-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+
+.step-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* FEATURES */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  border: 1px solid var(--border);
+  margin-top: 3rem;
+  background: var(--border);
+}
+
+.feat-card {
+  background: var(--bg);
+  padding: 2rem 1.8rem;
+  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.feat-card:hover { background: rgba(0,201,167,0.04); }
+
+.feat-card.highlight {
+  background: rgba(0,201,167,0.06);
+  border: 1px solid rgba(0,201,167,0.3);
+}
+
+.feat-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--teal);
+  opacity: 0.6;
+  margin-bottom: 0.8rem;
+}
+
+.feat-icon { font-size: 1.4rem; margin-bottom: 0.75rem; }
+
+.feat-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.feat-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+
+/* MARKET */
+.market-section { background: var(--bg3); }
+
+.tam-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.tam-ring {
+  display: flex; align-items: center; gap: 1.5rem;
+}
+
+.ring-bar {
+  height: 48px;
+  background: rgba(0,201,167,0.08);
+  border: 1px solid rgba(0,201,167,0.2);
+  border-left: 3px solid var(--teal);
+  display: flex; align-items: center;
+  padding: 0 1.2rem;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.ring-bar:hover { background: rgba(0,201,167,0.12); }
+
+.ring-val {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--teal);
+}
+
+.ring-info {
+  display: flex; flex-direction: column;
+}
+
+.ring-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.ring-desc { font-size: 0.78rem; color: var(--text-muted); }
+
+/* MILESTONES */
+.milestones {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  border: 1px solid var(--border);
+  margin-top: 3rem;
+  background: var(--border);
+}
+
+.milestone {
+  background: var(--bg);
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+
+.ms-phase {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: var(--teal);
+  opacity: 0.7;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.ms-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.ms-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.ms-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+
+/* VALUE PROP */
+.vp-section { text-align: center; }
+
+.vp-box {
+  max-width: 820px;
+  margin: 3rem auto 0;
+  border: 1px solid var(--border-bright);
+  background: rgba(0,201,167,0.04);
+  padding: 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.vp-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+}
+
+.vp-for {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.vp-main {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  color: var(--text);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.3px;
+}
+
+.vp-main span { color: var(--teal); }
+
+.vp-unlike {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.3px;
+  line-height: 1.6;
+}
+
+.vp-proof {
+  font-size: 0.9rem;
+  color: var(--teal);
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* VIDEO */
+.video-section { background: var(--bg2); }
+
+.video-wrap {
+  margin-top: 3rem;
+  border: 1px solid var(--border);
+  aspect-ratio: 16/9;
+  background: rgba(6,21,32,0.9);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+}
+
+.video-wrap iframe {
+  width: 100%; height: 100%;
+  border: none; display: block;
+}
+
+.video-placeholder-inner {
+  display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+}
+
+.play-hex {
+  width: 80px; height: 80px;
+  background: var(--teal);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 40px rgba(0,201,167,0.3);
+}
+.play-hex:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 60px rgba(0,201,167,0.5);
+}
+
+.play-hex::after {
+  content: '';
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 12px 0 12px 20px;
+  border-color: transparent transparent transparent var(--bg);
+  margin-left: 4px;
+}
+
+.play-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* CTA */
+.cta-section {
+  text-align: center;
+  padding: 8rem 6%;
+  position: relative;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  width: 800px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0,201,167,0.06) 0%, transparent 70%);
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.cta-section .sec-title { margin-bottom: 1.5rem; }
+.cta-section .sec-sub { margin: 0 auto 3rem; text-align: center; }
+
+.email-row {
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+  border: 1px solid var(--border-bright);
+}
+
+.email-row input {
+  flex: 1;
+  background: rgba(0,201,167,0.04);
+  border: none;
+  outline: none;
+  padding: 14px 20px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+
+.email-row input::placeholder { color: var(--text-muted); }
+
+.email-row button {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--teal);
+  border: none;
+  padding: 14px 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.email-row button:hover { background: #00e6be; }
+
+.cta-note {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: rgba(122,159,168,0.5);
+  margin-top: 1rem;
+  text-transform: uppercase;
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 6%;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg2);
+}
+
+.footer-logo {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  color: var(--teal);
+  text-shadow: 0 0 10px rgba(0,201,167,0.3);
+}
+
+.footer-copy {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: rgba(122,159,168,0.4);
+  text-transform: uppercase;
+}
+
+/* FADE IN */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade { animation: fadeUp 0.8s ease both; }
+.d1 { animation-delay: 0.1s; }
+.d2 { animation-delay: 0.2s; }
+.d3 { animation-delay: 0.3s; }
+.d4 { animation-delay: 0.4s; }
+.d5 { animation-delay: 0.5s; }
+
+/* SCAN LINE FLICKER */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.scanline {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,201,167,0.06), transparent);
+  pointer-events: none;
+  z-index: 9999;
+  animation: scanline 8s linear infinite;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .problem-grid, .steps, .features-grid, .milestones { grid-template-columns: 1fr; }
+  .stats-row { flex-wrap: wrap; }
+  .stat-item { flex: 1 1 40%; border-bottom: 1px solid var(--border); }
+  nav .nav-links { display: none; }
+  .comp-map { max-width: 300px; margin: 2rem auto 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="scanline"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Mind<span>Shift</span></div>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#how">System</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#market">Market</a></li>
+    <li><a href="#video">Pitch</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Join Waitlist</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow fade d1">EdTech · Gen Z · Gamified Learning</div>
+  <h1 class="fade d2">
+    <span class="line1">Learn Better.</span>
+    <span class="line2">Learn Faster.</span>
+    <span class="line3">Own Your Feed.</span>
+  </h1>
+  <p class="hero-sub fade d3">
+    MindShift transforms the short-video format students are already addicted to into a curriculum-aligned, goal-driven skill engine — with real rewards for real progress.
+  </p>
+  <div class="hero-btns fade d4">
+    <a href="#cta" class="btn-teal">Join the Waitlist</a>
+    <a href="#video" class="btn-ghost">Watch the Pitch</a>
+  </div>
+
+  <div class="stats-row fade d5">
+    <div class="stat-item">
+      <div class="stat-n">4–7h</div>
+      <div class="stat-l">Daily screen time wasted</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">$163B</div>
+      <div class="stat-l">Global EdTech market</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">$78K</div>
+      <div class="stat-l">Revenue proj. (6 months)</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">100%</div>
+      <div class="stat-l">Educator-vetted content</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="problem-grid">
+    <div>
+      <div class="sec-label">The Problem</div>
+      <h2 class="sec-title">The Algorithm<br>Works Against You.</h2>
+      <p class="sec-sub">Students spend 4–7 hours daily on platforms engineered to maximize engagement — not growth. The result: delayed skill development, cognitive fatigue, and missed career opportunities.</p>
+
+      <div class="problem-list">
+        <div class="prob-item">
+          <div class="prob-icon">📉</div>
+          <div>
+            <div class="prob-title">Addictive by Design</div>
+            <div class="prob-text">Platforms optimize for dopamine loops and screen time, not academic or career outcomes.</div>
+          </div>
+        </div>
+        <div class="prob-item">
+          <div class="prob-icon">🎭</div>
+          <div>
+            <div class="prob-title">Zero Curriculum Alignment</div>
+            <div class="prob-text">Viral content has no connection to what students need for internships, certifications, or skill growth.</div>
+          </div>
+        </div>
+        <div class="prob-item">
+          <div class="prob-icon">⏰</div>
+          <div>
+            <div class="prob-title">Cognitive Fragmentation</div>
+            <div class="prob-text">Constant task-switching reduces focus endurance and delays acquisition of technical skills like MATLAB, CAD, and programming.</div>
+          </div>
+        </div>
+        <div class="prob-item">
+          <div class="prob-icon">🚫</div>
+          <div>
+            <div class="prob-title">Engagement ≠ Growth</div>
+            <div class="prob-text">Existing platforms either maximize engagement without growth, or require effort without sustaining it.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Competition Map -->
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="sec-label" style="align-self:flex-start;">Competitive Landscape</div>
+      <div class="comp-map">
+        <div class="axis-h"></div>
+        <div class="axis-v"></div>
+
+        <!-- Labels -->
+        <div class="axis-label" style="top:50%;left:4px;transform:translateY(-50%);">Passive</div>
+        <div class="axis-label" style="top:50%;right:4px;transform:translateY(-50%);">Productive</div>
+        <div class="axis-label" style="top:6px;left:50%;transform:translateX(-50%);">High Goal</div>
+        <div class="axis-label" style="bottom:6px;left:50%;transform:translateX(-50%);">Low Goal</div>
+
+        <!-- Competitors -->
+        <div class="map-dot" style="left:22%;top:68%;">
+          <div class="dot-circle"></div>
+          <div class="dot-name">TikTok</div>
+        </div>
+        <div class="map-dot" style="left:30%;top:62%;">
+          <div class="dot-circle"></div>
+          <div class="dot-name">Instagram</div>
+        </div>
+        <div class="map-dot" style="left:55%;top:60%;">
+          <div class="dot-circle"></div>
+          <div class="dot-name">YouTube</div>
+        </div>
+        <div class="map-dot" style="left:56%;top:48%;">
+          <div class="dot-circle"></div>
+          <div class="dot-name">Coursera</div>
+        </div>
+        <div class="map-dot" style="left:60%;top:52%;">
+          <div class="dot-circle"></div>
+          <div class="dot-name">Notion</div>
+        </div>
+        <div class="map-dot" style="left:62%;top:54%;">
+          <div class="dot-circle"></div>
+          <div class="dot-name">Duolingo</div>
+        </div>
+
+        <!-- MindShift -->
+        <div class="map-dot" style="left:80%;top:22%;">
+          <div class="dot-circle active"></div>
+          <div class="dot-name active">MindShift ✦</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how-section">
+  <div class="sec-label">System Architecture</div>
+  <h2 class="sec-title">How MindShift Works</h2>
+  <p class="sec-sub">Four stages. One goal. Turn passive scrolling into active skill-building — without sacrificing the dopamine.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Choose Your Goals</div>
+      <div class="step-text">Students enter enrolled subjects, target certifications, and career goals. The system maps each to a content pathway. <strong style="color:var(--teal)">25% complete.</strong></div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Personalized Feed</div>
+      <div class="step-text">Our algorithm surfaces only educator-vetted short videos aligned to your goals. No junk. No distraction. Pure signal. <strong style="color:var(--teal)">50% complete.</strong></div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Progress & Challenges</div>
+      <div class="step-text">Gamified daily challenges, quizzes, and streak tracking keep students consistent — and make progress visible. <strong style="color:var(--teal)">75% complete.</strong></div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Unlock & Earn</div>
+      <div class="step-text">Complete learning milestones to unlock entertainment content and earn real prizes, gift cards, and scholarship credits. <strong style="color:var(--teal)">100% complete.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="sec-label">Platform Features</div>
+  <h2 class="sec-title">Built for Learners,<br>Not Advertisers.</h2>
+
+  <div class="features-grid">
+    <div class="feat-card highlight">
+      <div class="feat-num">F-01</div>
+      <div class="feat-icon">🎯</div>
+      <div class="feat-title">Curated Algorithm</div>
+      <div class="feat-text">Every video reviewed by educators before publishing. No misinformation. No distraction. We control the feed — not engagement bots.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">F-02</div>
+      <div class="feat-icon">🏆</div>
+      <div class="feat-title">Streak Rewards</div>
+      <div class="feat-text">Daily login streaks earn XP that converts to real prizes — gift cards, school supplies, and scholarship credits.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">F-03</div>
+      <div class="feat-icon">🌍</div>
+      <div class="feat-title">Language Learning</div>
+      <div class="feat-text">Immersive language acquisition through short videos, cultural content, and native speaker stories.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">F-04</div>
+      <div class="feat-icon">📖</div>
+      <div class="feat-title">History Stories</div>
+      <div class="feat-text">Narrative-driven historical content told through documentary-style shorts by expert verified creators.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">F-05</div>
+      <div class="feat-icon">✅</div>
+      <div class="feat-title">Verified Creators</div>
+      <div class="feat-text">Only educators, institutions, and vetted subject-matter experts can publish — students always learn from the best.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-num">F-06</div>
+      <div class="feat-icon">📊</div>
+      <div class="feat-title">Parent Dashboards</div>
+      <div class="feat-text">Full transparency for parents and teachers. Track subjects, time spent, and quiz performance week by week.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET -->
+<section id="market" class="market-section">
+  <div class="sec-label">Market Opportunity</div>
+  <h2 class="sec-title">The Market Is Ready.</h2>
+  <p class="sec-sub">The EdTech market is exploding. Students are already spending money on Coursera, Udemy, and productivity tools — MindShift captures that intent with superior engagement.</p>
+
+  <div class="tam-visual">
+    <div class="tam-ring">
+      <div class="ring-bar" style="width:100%;">
+        <div class="ring-val">$163B</div>
+      </div>
+      <div class="ring-info">
+        <div class="ring-name">TAM — Global EdTech Market</div>
+        <div class="ring-desc">Total global spending on digital education technologies (HolonIQ)</div>
+      </div>
+    </div>
+    <div class="tam-ring">
+      <div class="ring-bar" style="width:70%;">
+        <div class="ring-val">$98B</div>
+      </div>
+      <div class="ring-info">
+        <div class="ring-name">SAM — Focus + Skill-Based Learning</div>
+        <div class="ring-desc">Students seeking productivity and career-oriented learning tools</div>
+      </div>
+    </div>
+    <div class="tam-ring">
+      <div class="ring-bar" style="width:35%;">
+        <div class="ring-val">$98M</div>
+      </div>
+      <div class="ring-info">
+        <div class="ring-name">SOM — STEM Students & Career Learners</div>
+        <div class="ring-desc">Initial obtainable share based on early-stage market penetration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MILESTONES -->
+<section id="milestones">
+  <div class="sec-label">Roadmap</div>
+  <h2 class="sec-title">The Path to Scale.</h2>
+
+  <div class="milestones">
+    <div class="milestone">
+      <div class="ms-phase">Phase 01</div>
+      <div class="ms-icon">🎯</div>
+      <div class="ms-title">Develop MVP</div>
+      <div class="ms-text">Launch Beta Version with core feed, subject selection, and creator onboarding at UCF.</div>
+    </div>
+    <div class="milestone">
+      <div class="ms-phase">Phase 02</div>
+      <div class="ms-icon">📈</div>
+      <div class="ms-title">Reach 1,000 Users</div>
+      <div class="ms-text">Add gamification features. Campus ambassador program expands to 5 universities.</div>
+    </div>
+    <div class="milestone">
+      <div class="ms-phase">Phase 03</div>
+      <div class="ms-icon">🏠</div>
+      <div class="ms-title">Reach 10,000 Users</div>
+      <div class="ms-text">Launch monetization. Introduce premium tiers and institutional partnerships.</div>
+    </div>
+    <div class="milestone">
+      <div class="ms-phase">Phase 04</div>
+      <div class="ms-icon">🚀</div>
+      <div class="ms-title">Achieve Profitability</div>
+      <div class="ms-text">Expand into new markets. International student audiences and corporate upskilling.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE PROP -->
+<section class="vp-section">
+  <div class="sec-label" style="justify-content:center;">Value Proposition</div>
+  <h2 class="sec-title" style="text-align:center;">Why MindShift Wins.</h2>
+
+  <div class="vp-box">
+    <div class="vp-for">For students aged 10–22, and the parents & educators who support them —</div>
+    <div class="vp-main">
+      MindShift is the <span>goal-aligned educational platform</span> that converts short-video addiction into measurable skill progress — using adaptive algorithms and a gamified reward system that makes learning the most satisfying thing on your phone.
+    </div>
+    <div class="vp-unlike">
+      Unlike TikTok, YouTube Shorts, Coursera, or Notion — which either maximize engagement without growth, or require effort without sustaining it — MindShift is the only platform that does both simultaneously.
+    </div>
+    <div class="vp-proof">Total Revenue Projection: $78,000 within the first 6 months.</div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section id="video" class="video-section">
+  <div class="sec-label">Pitch Presentation</div>
+  <h2 class="sec-title">See the Full Vision.</h2>
+  <p class="sec-sub">Watch the 3–4 minute value proposition pitch — the problem, the solution, the market, and why MindShift is uniquely positioned to win.</p>
+
+  <!--
+    TO EMBED YOUR VIDEO:
+    Delete the placeholder div below and replace with:
+
+    YouTube:
+    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+
+    Vimeo:
+    <iframe src="https://player.vimeo.com/video/YOUR_VIDEO_ID" allowfullscreen></iframe>
+
+    Wrap in: <div class="video-wrap"> ... </div>
+  -->
+
+  <div class="video-wrap">
+    <div class="video-placeholder-inner">
+      <div class="play-hex"></div>
+      <div class="play-label">MindShift · Value Proposition Pitch</div>
+      <div style="font-size:0.7rem;letter-spacing:1px;color:rgba(122,159,168,0.4);text-transform:uppercase;margin-top:0.5rem;">Paste your YouTube or Vimeo embed here</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="cta-section">
+  <div class="sec-label" style="justify-content:center;">Early Access</div>
+  <h2 class="sec-title">Be First.<br>Shift Everything.</h2>
+  <p class="sec-sub">Join thousands of students, parents, and educators already on the waitlist. We're onboarding our first cohort of creator educators now.</p>
+
+  <div class="email-row">
+    <input type="email" placeholder="your@email.com">
+    <button onclick="this.textContent='LOCKED IN ✦'; this.style.background='#00a98a';">Join Waitlist</button>
+  </div>
+  <div class="cta-note">No spam · No data selling · Launch updates only</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">MindShift</div>
+  <div class="footer-copy">&copy; 2025 MindShift Inc. · Entrepreneurship Value Proposition Competition</div>
+</footer>
+
+</body>
+</html>
